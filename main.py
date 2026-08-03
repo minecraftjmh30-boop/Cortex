@@ -3,6 +3,7 @@ from cortex import start_cortex
 
 
 def main():
+    #search and store available TP-link devices
     print("""
     ,o888888o.        ,o888888o.     8 888888888o. 8888888 8888888888 8 8888888888   `8.`8888.      ,8' 
    8888     `88.   . 8888     `88.   8 8888    `88.      8 8888       8 8888          `8.`8888.    ,8'  

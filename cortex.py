@@ -1,7 +1,7 @@
 import speech_recognition
 import pyttsx3
 import pygame
-lights = False #program will eventually find if lights are on or off
+from command.keys.commands import commands
 
 def start_cortex():
     print("Starting cortex...")
@@ -20,17 +20,21 @@ def cortex_listen():
                 text = text.lower()
 
                 if "cortex" in text:
-                    if "lights" in text:
 
-                        match lights:
-                            case False:
-                                print("Turning lights on now")
-                                lights = True
-                            case True:
-                                print("Turning lights off now")
-                                lights = False
+                    index = text.find("cortex")
+                    if index != -1:
+                        text = text[index:]
 
-                    else:
+                    found = False
+                    for command in commands:
+                        for key in command.keys:
+                            if key in text:
+                                command.execute()
+                                found = True
+                                break
+                        if found:
+                            break
+                    if not found:
                         print("how can i help?")
                 else:
                     print(f"Recognized: {text}")
