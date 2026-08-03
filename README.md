@@ -2,7 +2,7 @@
 
 Cortex is a simple program for hearing your voice commands to do simple tasks
 
-##Installation
+## Installation
 
 Python Version ***3.12 ONLY***
 
