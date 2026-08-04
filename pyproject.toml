@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cortex"
 version = "0.1.0"
-description = "A voice-controlled home automation assistant using Kasa devices"
+description = "A voice-controlled home automation assistant using Kasa devices (Requires system libs on Linux: portaudio19-dev, flac, libespeak1)"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [
@@ -21,6 +21,12 @@ dependencies = [
     "cryptography>=42.0.0",
     "aiohttp>=3.9.0",
 ]
+
+[project.optional-dependencies]
+linux = [
+    "PyAudio>=0.2.14", # Specifically requires portaudio19-dev on system
+]
+
 
 [project.scripts]
 cortex = "main:main"

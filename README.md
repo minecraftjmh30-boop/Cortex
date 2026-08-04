@@ -6,8 +6,10 @@ Cortex is a simple program for hearing your voice commands to do simple tasks
 
 Python Version ***3.12 ONLY***
 
-Cortex ***NEEDS*** SpeechRocognition, pyttsx3, pygame, and PyAudio to run.
+### For Linux
+
+For linux use, you need to run this command for the program to use audio
 
 ```bash
-pip install SpeechRecognition pyttsx3 pygame PyAudio
+sudo apt-get update && sudo apt-get install -y portaudio19-dev flac libespeak1 python3-pyaudio
 ```
