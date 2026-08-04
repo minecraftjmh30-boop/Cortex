@@ -1,4 +1,4 @@
-#USE PYTHON 3.12
+
 from cortex import start_cortex
 
 

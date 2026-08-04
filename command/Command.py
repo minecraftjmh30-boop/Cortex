@@ -1,3 +1,6 @@
+import asyncio
+import inspect
+
 
 class Command:
     def __init__(self,name,keys,function):
@@ -7,9 +10,9 @@ class Command:
 
     def execute(self):
         if callable(self.function):
-            self.function()
-        else:
-            print(f"No function assigned to command: {self.name}")
-
+            if inspect.iscoroutinefunction(self.function):
+                asyncio.run(self.function())
+            else:
+                self.function()
 
 
