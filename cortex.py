@@ -1,15 +1,17 @@
 import speech_recognition
 import pyttsx3
 import pygame
+from colorama import Fore
+
 from command.keys.commands import commands
 
-def start_cortex():
-    print("Starting cortex...")
-    cortex_listen()
+async def start_cortex():
+    print(Fore.GREEN + "Starting cortex...")
+    await cortex_listen()
 
-def cortex_listen():
+async def cortex_listen():
     recognizer = speech_recognition.Recognizer()  # voice recognizer
-    print("Listening...")
+    print(Fore.GREEN+"Listening...")
     while True:
         try:
             with speech_recognition.Microphone() as mic:
@@ -29,16 +31,16 @@ def cortex_listen():
                     for command in commands:
                         for key in command.keys:
                             if key in text:
-                                command.execute()
+                                await command.execute()
                                 found = True
                                 break
                         if found:
                             break
                     if not found:
-                        print("how can i help?")
+                        print(Fore.GREEN+"how can i help?")
                 else:
-                    print(f"Recognized: {text}")
+                    print(Fore.GREEN+f"Recognized: {text}")
         except speech_recognition.UnknownValueError:
-            print("could not understand audio")
+            print(Fore.RED+"could not understand audio")
             continue
 
