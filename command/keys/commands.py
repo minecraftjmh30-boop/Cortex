@@ -7,7 +7,7 @@ from command.functions.test.audio_test import start_audio_test
 
 commands = ( Command("Toggle Lights",("lights", "toggle thy bulbs"), toggle_lights),
              Command("Toggle Record Player",("needle drop", "drop the needle"), toggle_record_player),
-             Command("Audio Test", ("test audio", "audio test"), start_audio_test()),
+             Command("Audio Test", ("test audio", "audio test"), start_audio_test),
              Command("Introduction",("introduce yourself","who are you"), introduction),
              )
 
