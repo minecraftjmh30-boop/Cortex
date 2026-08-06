@@ -38,8 +38,9 @@ async def cortex_listen():
                             break
                     if not found:
                         print(Fore.GREEN+"how can i help?")
+                        print(Fore.YELLOW+f"Recognized: {text}")
                 else:
-                    print(Fore.GREEN+f"Recognized: {text}")
+                    print(Fore.YELLOW+f"Recognized: {text}")
         except speech_recognition.UnknownValueError:
             print(Fore.RED+"could not understand audio")
             continue
