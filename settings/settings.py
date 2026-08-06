@@ -17,7 +17,13 @@ async def menu():
         print("4) exit")
 
         choice = input("Enter your choice: ")
-        match int(choice):
+        try:
+            choice_int = int(choice)
+        except ValueError:
+            print(Fore.RED + "Invalid input. Please enter a number.")
+            continue
+
+        match choice_int:
             case 1:
                 edit_credentials()
             case 2:
@@ -47,10 +53,18 @@ def edit_credentials():
 
 def try_file(filename):
     path = f"settings/storage/{filename}.json"
+    needs_reset = False
     try:
         with open(path, "r") as f:
-            json.load(f)
+            data = json.load(f)
+            if filename == "lights" and "lights" not in data:
+                needs_reset = True
+            elif filename == "credentials" and "credentials" not in data:
+                needs_reset = True
     except (FileNotFoundError, json.JSONDecodeError):
+        needs_reset = True
+
+    if needs_reset:
         with open(path, "w") as f:
             if filename == "lights":
                 json.dump({"lights": []}, f)
