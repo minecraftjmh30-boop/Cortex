@@ -30,7 +30,8 @@ def pick_random_audio(files):
     return file
 
 def play_audio(file_path):
-    pygame.mixer.init()
+    if not pygame.mixer.get_init():
+        pygame.mixer.init()
     pygame.mixer.music.load(str(file_path))
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
