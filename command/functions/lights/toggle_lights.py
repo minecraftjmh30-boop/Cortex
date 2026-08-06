@@ -2,9 +2,12 @@ import asyncio
 import json
 from kasa import Discover, exceptions  # Added exceptions
 
+from audio.play import audio
+
 
 async def toggle_lights():
     print("toggling lights")
+    audio("basic")
     try:
         with open("settings/storage/credentials.json") as cred_file:
             credentials = json.load(cred_file)

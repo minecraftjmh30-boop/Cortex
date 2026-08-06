@@ -1,7 +1,7 @@
 import platform
 current_os = platform.system()
 if current_os == "Linux":
-    #this suppresses ALSA lib errors
+    #this should suppress ALSA lib errors
     import ctypes
 
     ERROR_HANDLER_FUNC = ctypes.CFUNCTYPE(None, ctypes.c_char_p, ctypes.c_int,

@@ -14,6 +14,7 @@ async def menu():
         print("1) Edit credentials")
         print("2) discover ips for kasa")
         print("3) edit lights")
+        print("4) edit record player")
         print("4) exit")
 
         choice = input("Enter your choice: ")
@@ -29,8 +30,10 @@ async def menu():
             case 2:
                 await discover()
             case 3:
-                edit_lights()
+                edit_types("lights")
             case 4:
+                edit_types("record_player")
+            case 5:
                 return
             case _:
                 print(Fore.RED + "Wrong input")
@@ -75,20 +78,20 @@ def try_file(filename):
 
 
 
-def edit_lights():
-    try_file("lights")
-    lights_list = []
+def edit_types(command_type):
+    try_file(command_type)
+    type_list = []
 
     while True:
-        light_ip = input("Enter light ip (-1 to exit): ")
-        if light_ip == "-1":
+        command_ip = input(f"Enter {command_type} ip (-1 to exit): ")
+        if command_ip == "-1":
             break
         else:
-            lights_list.append(light_ip)
-    data = {"lights": lights_list}
-    with open("settings/storage/lights.json", "w") as file:
+            type_list.append(command_ip)
+    data = {f"{command_type}": type_list}
+    with open(f"settings/storage/{command_type}.json", "w") as file:
         json.dump(data, file, indent=2)
-    print(Fore.GREEN + "Lights updated successfully.")
+    print(Fore.GREEN + f"{command_type} updated successfully.")
 
 
 

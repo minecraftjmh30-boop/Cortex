@@ -1,2 +1,2 @@
 def toggle_record_player():
-    print("Toggle Record Player")
+    print("Record Player has not been configured at this time")

@@ -4,6 +4,7 @@ import pygame
 from colorama import Fore
 
 from command.keys.commands import commands
+from audio.play import audio
 
 async def start_cortex():
     print(Fore.GREEN + "Starting cortex...")
@@ -16,9 +17,9 @@ async def cortex_listen():
         try:
             with speech_recognition.Microphone() as mic:
                 recognizer.adjust_for_ambient_noise(mic, duration=0.2)
-                audio = recognizer.listen(mic)
+                audio_heard = recognizer.listen(mic)
 
-                text = recognizer.recognize_google(audio)
+                text = recognizer.recognize_google(audio_heard)
                 text = text.lower()
 
                 if "cortex" in text:
@@ -37,6 +38,7 @@ async def cortex_listen():
                         if found:
                             break
                     if not found:
+                        audio("greetings")
                         print(Fore.GREEN+"how can i help?")
                         print(Fore.YELLOW+f"Recognized: {text}")
                 else:
