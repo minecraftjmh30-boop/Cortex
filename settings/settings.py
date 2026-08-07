@@ -15,7 +15,7 @@ async def menu():
         print("2) discover ips for kasa")
         print("3) edit lights")
         print("4) edit record player")
-        print("4) exit")
+        print("5) exit")
 
         choice = input("Enter your choice: ")
         try:
@@ -64,6 +64,8 @@ def try_file(filename):
                 needs_reset = True
             elif filename == "credentials" and "credentials" not in data:
                 needs_reset = True
+            elif filename == "record_player" and "record_player" not in data:
+                needs_reset = True
     except (FileNotFoundError, json.JSONDecodeError):
         needs_reset = True
 
@@ -73,6 +75,8 @@ def try_file(filename):
                 json.dump({"lights": []}, f)
             elif filename == "credentials":
                 json.dump({"credentials": {"email": "", "password": ""}}, f)
+            elif filename == "record_player":
+                json.dump({"record_player": []}, f)
             else:
                 json.dump({}, f)
 
