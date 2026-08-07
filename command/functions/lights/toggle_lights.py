@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 from kasa import Discover, exceptions  # Added exceptions
 
 from audio.play import audio
@@ -22,6 +23,10 @@ async def toggle_lights():
     except (FileNotFoundError, json.JSONDecodeError) as e:
         print(f"Error loading configuration: {e}")
         return
+
+    # Ensure TZ is set for Linux environments where timezone detection might fail
+    if os.name != 'nt' and 'TZ' not in os.environ:
+        os.environ['TZ'] = 'UTC'
 
     for ip in light_ips:
         try:

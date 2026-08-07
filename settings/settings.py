@@ -1,4 +1,5 @@
 import json
+import os
 
 from colorama import Fore
 from kasa import Credentials, Discover, exceptions
@@ -118,5 +119,9 @@ async def discover():
     except (FileNotFoundError, KeyError) as e:
         print(Fore.RED + f"Error loading credentials: {e}")
         return None
+    # Ensure TZ is set for Linux environments where timezone detection might fail
+    if os.name != 'nt' and 'TZ' not in os.environ:
+        os.environ['TZ'] = 'UTC'
+
     devices = await Discover.discover(on_discovered=print_dev_info, credentials=creds)
     return devices
