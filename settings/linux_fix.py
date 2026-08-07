@@ -7,13 +7,29 @@ def linux_fix():
     import time
     # Ensure TZ is set for Linux environments where timezone detection might fail (e.g. Raspberry Pi)
     # python-kasa uses zoneinfo which requires IANA names (e.g. 'Etc/UTC') rather than POSIX strings.
+    import zoneinfo
+    import re
+
+    original_zoneinfo = zoneinfo.ZoneInfo
+
+    class IANAZoneInfo(original_zoneinfo):
+        def __new__(cls, key):
+            # If key is POSIX-like or empty, use Etc/UTC
+            if not key or re.search(r'\d', key):
+                key = 'Etc/UTC'
+            try:
+                return original_zoneinfo(key)
+            except zoneinfo.ZoneInfoNotFoundError:
+                return original_zoneinfo('Etc/UTC')
+
+    zoneinfo.ZoneInfo = IANAZoneInfo
+
     if 'TZ' not in os.environ:
         os.environ['TZ'] = 'Etc/UTC'
         if hasattr(time, 'tzset'):
             time.tzset()
     else:
         # Check if TZ is a POSIX string (often contains digits like 'EST5EDT')
-        import re
         if re.search(r'\d', os.environ['TZ']):
              os.environ['TZ'] = 'Etc/UTC'
              if hasattr(time, 'tzset'):
