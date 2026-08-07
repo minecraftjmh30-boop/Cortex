@@ -3,6 +3,14 @@ _jack_error_handler = None
 _jack_info_handler = None
 
 def linux_fix():
+    import os
+    import time
+    # Ensure TZ is set for Linux environments where timezone detection might fail (e.g. Raspberry Pi)
+    if 'TZ' not in os.environ:
+        os.environ['TZ'] = 'Etc/UTC'
+        if hasattr(time, 'tzset'):
+            time.tzset()
+
     # this should suppress ALSA lib errors
     import ctypes
 

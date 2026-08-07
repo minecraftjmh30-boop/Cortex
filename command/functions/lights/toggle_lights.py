@@ -24,10 +24,6 @@ async def toggle_lights():
         print(f"Error loading configuration: {e}")
         return
 
-    # Ensure TZ is set for Linux environments where timezone detection might fail
-    if os.name != 'nt' and 'TZ' not in os.environ:
-        os.environ['TZ'] = 'UTC'
-
     for ip in light_ips:
         try:
             print(f"Connecting to {ip}...")
