@@ -7,11 +7,10 @@ name = "cortex"
 version = "0.1.0"
 description = "a artifical butler created by jack hackett and lincoln stuller"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = "=3.12"
 authors = [
     { name = "Jack Hackett", email = "hackettjack30@gmail.com" }
 ]
-keywords = ["kasa", "iot", "voice-control", "automation"]
 dependencies = [
     "python-kasa>=0.10.2",
     "pygame-ce>=2.5.7",
@@ -20,7 +19,10 @@ dependencies = [
     "PyAudio>=0.2.14",
     "cryptography>=42.0.0",
     "aiohttp>=3.9.0",
-    "colorama>=0.4.6"
+    "colorama>=0.4.6",
+    "piper-tts>=1.6.0",
+    "numpy>=2.5.1",
+    "sounddevice>=0.5.5"
 ]
 
 [project.optional-dependencies]
