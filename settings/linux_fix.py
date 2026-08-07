@@ -6,10 +6,18 @@ def linux_fix():
     import os
     import time
     # Ensure TZ is set for Linux environments where timezone detection might fail (e.g. Raspberry Pi)
+    # python-kasa uses zoneinfo which requires IANA names (e.g. 'Etc/UTC') rather than POSIX strings.
     if 'TZ' not in os.environ:
         os.environ['TZ'] = 'Etc/UTC'
         if hasattr(time, 'tzset'):
             time.tzset()
+    else:
+        # Check if TZ is a POSIX string (often contains digits like 'EST5EDT')
+        import re
+        if re.search(r'\d', os.environ['TZ']):
+             os.environ['TZ'] = 'Etc/UTC'
+             if hasattr(time, 'tzset'):
+                 time.tzset()
 
     # this should suppress ALSA lib errors
     import ctypes
