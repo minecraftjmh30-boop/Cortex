@@ -4,11 +4,13 @@ import os
 from kasa import Discover, exceptions  # Added exceptions
 
 from audio.play import audio
+from command.functions.helpers.toggle import toggle_plugs
+from speech.speak import talk
 
 
 async def toggle_lights():
-    print("toggling lights")
-    audio("basic")
+    talk("toggling lights")
+
     try:
         with open("settings/storage/credentials.json") as cred_file:
             credentials = json.load(cred_file)
@@ -24,24 +26,4 @@ async def toggle_lights():
         print(f"Error loading configuration: {e}")
         return
 
-    for ip in light_ips:
-        try:
-            print(f"Connecting to {ip}...")
-            dev = await Discover.discover_single(
-                ip,
-                username=credentials["credentials"]["email"],
-                password=credentials["credentials"]["password"]
-            )
-            await dev.update()
-
-            if dev.is_on:
-                await dev.turn_off()
-                print(f"Turned off {dev.alias}")
-            else:
-                await dev.turn_on()
-                print(f"Turned on {dev.alias}")
-
-        except exceptions.KasaException as e:
-            print(f"Could not connect to light at {ip}: {e}")
-        except Exception as e:
-            print(f"An unexpected error occurred for {ip}: {e}")
+    await toggle_plugs("Lights", light_ips, credentials)
