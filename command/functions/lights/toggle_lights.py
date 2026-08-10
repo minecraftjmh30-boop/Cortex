@@ -9,7 +9,7 @@ from speech.speak import talk
 
 
 async def toggle_lights():
-    talk("toggling lights")
+    talk("basic_dialog")
 
     try:
         with open("settings/storage/credentials.json") as cred_file:

@@ -8,7 +8,7 @@ from speech.speak import talk
 
 
 async def toggle_record_player():
-    talk("toggling record player")
+    talk("basic_dialog")
 
     try:
         with open("settings/storage/credentials.json") as cred_file:
