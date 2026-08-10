@@ -1,3 +1,4 @@
+from colorama import Fore
 from kasa import Discover, exceptions
 
 
@@ -20,6 +21,6 @@ async def toggle_plugs(name, ips, credential):
                 print(f"Turned on {dev.alias}")
 
         except exceptions.KasaException as e:
-            print(f"Could not connect to {name} at {ip}: {e}")
+            print(Fore.RED+f"Could not connect to {name} at {ip}: {e}")
         except Exception as e:
-            print(f"An unexpected error occurred for {ip}: {e}")
+            print(Fore.RED+f"An unexpected error occurred for {ip}: {e}")
