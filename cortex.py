@@ -5,6 +5,8 @@ from colorama import Fore
 
 from command.keys.commands import commands
 from audio.play import audio
+from speech.speak import talk
+
 
 async def start_cortex():
     print(Fore.GREEN + "Starting cortex...")
@@ -38,8 +40,7 @@ async def cortex_listen():
                         if found:
                             break
                     if not found:
-                        audio("greetings")
-                        print(Fore.GREEN+"how can i help?")
+                        talk("how can i help")
                         print(Fore.YELLOW+f"Recognized: {text}")
                 else:
                     print(Fore.YELLOW+f"Recognized: {text}")
