@@ -1,7 +1,5 @@
-from colorama import Fore
-
 from audio.play import play_audio
-from speech.speak import talk
+from head.speech.speak import talk
 
 
 def start_audio_test():
