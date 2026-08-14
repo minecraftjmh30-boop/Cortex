@@ -1,10 +1,9 @@
 import json
-import os
 
 from colorama import Fore
 from kasa import Credentials, Discover, exceptions
 
-from command.functions.lights.toggle_lights import toggle_lights
+
 
 
 async def menu():
@@ -54,7 +53,7 @@ def edit_credentials():
        return None
 
 
-
+#AI-Generated Function
 def try_file(filename):
     path = f"settings/storage/{filename}.json"
     needs_reset = False
@@ -104,6 +103,7 @@ async def discover():
     print(Fore.GREEN + "discovering ips for kasa...")
     print("REMEMBER IPS FOR KASA")
 
+#AI-Generated except executions
     async def print_dev_info(dev):
         try:
             await dev.update()
