@@ -11,11 +11,11 @@ async def menu():
         print("============")
         print("  settings")
         print("============")
-        print("1) Edit credentials")
-        print("2) discover ips for kasa")
-        print("3) edit lights")
-        print("4) edit record player")
-        print("5) exit")
+        print("1) Edit Credentials")
+        print("2) Discover IPs for kasa")
+        print("3) Edit Lights")
+        print("4) Edit Record Player")
+        print("5) Exit")
 
         choice = input("Enter your choice: ")
         try:

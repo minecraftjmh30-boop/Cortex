@@ -5,10 +5,12 @@ from colorama import Fore
 
 from head.ears import listen
 from command.keys.commands import commands
+from command.keys.load_custom_commands import load_commands
 from speech.speak import talk
 
 
 async def start_cortex():
+    load_commands()
     print(Fore.GREEN + "Starting cortex...")
     recognizer = speech_recognition.Recognizer()
 
