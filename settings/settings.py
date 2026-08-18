@@ -3,6 +3,7 @@ import json
 from colorama import Fore
 from kasa import Credentials, Discover, exceptions
 
+from settings.custom_commands import c_c_menu
 from settings.helper import try_file
 
 
@@ -13,9 +14,8 @@ async def menu():
         print("============")
         print("1) Edit Credentials")
         print("2) Discover IPs for kasa")
-        print("3) Edit Lights")
-        print("4) Edit Record Player")
-        print("5) Exit")
+        print("3) Custom Commands")
+        print("4) Exit")
 
         choice = input("Enter your choice: ")
         try:
@@ -30,10 +30,8 @@ async def menu():
             case 2:
                 await discover()
             case 3:
-                edit_types("lights")
+                c_c_menu()
             case 4:
-                edit_types("record_player")
-            case 5:
                 return
             case _:
                 print(Fore.RED + "Wrong input")
