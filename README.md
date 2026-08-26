@@ -21,3 +21,6 @@ sudo apt-get update && sudo apt-get install -y portaudio19-dev flac libespeak1 p
 ```
 
 linux_fix.py should remove all known errors in the terminal for a cleaner experience 
+
+## Extra Help
+if you need extra help, go to [Tutorial.md](Tutorial.md)
