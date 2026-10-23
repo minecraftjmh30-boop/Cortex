@@ -5,6 +5,7 @@ import json
 def try_file(filename):
     path = f"settings/storage/{filename}.json"
     needs_reset = False
+    data = None
     try:
         with open(path, "r") as f:
             data = json.load(f)
@@ -21,9 +22,15 @@ def try_file(filename):
         with open(path, "w") as f:
             if filename == "lights":
                 json.dump({"lights": []}, f)
+                data = {"lights": []}
             elif filename == "credentials":
                 json.dump({"credentials": {"email": "", "password": ""}}, f)
+                data = {"credentials": {"email": "", "password": ""}}
             elif filename == "record_player":
                 json.dump({"record_player": []}, f)
+                data = {"record_player": []}
             else:
                 json.dump({}, f)
+                data = {}
+
+    return data

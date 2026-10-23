@@ -20,3 +20,6 @@ async def listen(recognizer):
     except speech_recognition.UnknownValueError:
         print(Fore.RED + "could not understand audio")
         return None
+    except speech_recognition.RequestError as e:
+        print(Fore.RED + f"speech recognition service error: {e}")
+        return None

@@ -21,7 +21,7 @@ async def toggle(name):
                 toggle_ips = [toggle_ips]
 
     except (FileNotFoundError, json.JSONDecodeError) as e:
-        print(f"Error loading configuration: {e}")
+        print(Fore.RED+f"Error loading configuration: {e}")
         return
 
     for ip in toggle_ips:

@@ -38,7 +38,7 @@ async def cortex_listen(recognizer):
 async def process_command(text):
     index = text.find("cortex")
     if index != -1:
-        text = text[index:]
+        text = text[index + len("cortex"):].strip()
 
     found = False
     for command in commands:

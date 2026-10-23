@@ -36,16 +36,16 @@ def load_commands():
 
 def load_custom_command_file():
     try:
-        custom_commands = ()
+        custom_commands = []
         with open("settings/storage/custom_commands.csv", mode='r', newline='') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                command = ()
+                command = []
                 name = row['Name']
                 keys = tuple(k.strip() for k in row['Keys'].split(','))
                 func_name = row['Function']
 
-                command.append(name, keys, func_name)
+                command.extend([name, keys, func_name])
                 custom_commands.append(command)
         return custom_commands
 
