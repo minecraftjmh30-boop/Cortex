@@ -10,7 +10,7 @@ import asyncio
 
 
 from colorama import Fore, init
-from cortex import start_cortex
+from head.cortex import start_cortex
 from settings.settings import menu
 init(autoreset=True)
 

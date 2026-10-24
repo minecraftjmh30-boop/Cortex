@@ -1,7 +1,4 @@
-from colorama import Fore
-
-from audio.play import audio
-from speech.speak import talk
+from head.speech.speak import talk
 
 
 def introduction():

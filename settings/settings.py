@@ -1,10 +1,10 @@
 import json
-import os
 
 from colorama import Fore
 from kasa import Credentials, Discover, exceptions
 
-from command.functions.lights.toggle_lights import toggle_lights
+from settings.custom_commands import c_c_menu
+from settings.helper import try_file
 
 
 async def menu():
@@ -12,11 +12,10 @@ async def menu():
         print("============")
         print("  settings")
         print("============")
-        print("1) Edit credentials")
-        print("2) discover ips for kasa")
-        print("3) edit lights")
-        print("4) edit record player")
-        print("5) exit")
+        print("1) Edit Credentials")
+        print("2) Discover IPs for kasa")
+        print("3) Custom Commands")
+        print("4) Exit")
 
         choice = input("Enter your choice: ")
         try:
@@ -31,10 +30,8 @@ async def menu():
             case 2:
                 await discover()
             case 3:
-                edit_types("lights")
+                c_c_menu()
             case 4:
-                edit_types("record_player")
-            case 5:
                 return
             case _:
                 print(Fore.RED + "Wrong input")
@@ -55,34 +52,8 @@ def edit_credentials():
 
 
 
-def try_file(filename):
-    path = f"settings/storage/{filename}.json"
-    needs_reset = False
-    try:
-        with open(path, "r") as f:
-            data = json.load(f)
-            if filename == "lights" and "lights" not in data:
-                needs_reset = True
-            elif filename == "credentials" and "credentials" not in data:
-                needs_reset = True
-            elif filename == "record_player" and "record_player" not in data:
-                needs_reset = True
-    except (FileNotFoundError, json.JSONDecodeError):
-        needs_reset = True
 
-    if needs_reset:
-        with open(path, "w") as f:
-            if filename == "lights":
-                json.dump({"lights": []}, f)
-            elif filename == "credentials":
-                json.dump({"credentials": {"email": "", "password": ""}}, f)
-            elif filename == "record_player":
-                json.dump({"record_player": []}, f)
-            else:
-                json.dump({}, f)
-
-
-
+#Delete
 def edit_types(command_type):
     try_file(command_type)
     type_list = []
@@ -104,6 +75,7 @@ async def discover():
     print(Fore.GREEN + "discovering ips for kasa...")
     print("REMEMBER IPS FOR KASA")
 
+#AI-Generated except executions
     async def print_dev_info(dev):
         try:
             await dev.update()
