@@ -1,3 +1,5 @@
+import threading
+
 import pygame
 import random
 from pathlib import Path
@@ -29,10 +31,16 @@ def pick_random_audio(files):
     file = random.choice(files)
     return file
 
+def _wait_for_audio_finished():
+    """Background thread to wait for audio playback to finish."""
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+
+
 def play_audio(file_path):
     if not pygame.mixer.get_init():
         pygame.mixer.init()
     pygame.mixer.music.load(str(file_path))
     pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
+    # Run the busy-wait in a background thread so the main thread stays responsive
+    threading.Thread(target=_wait_for_audio_finished, daemon=True).start()

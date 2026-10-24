@@ -1,3 +1,4 @@
+import asyncio
 import speech_recognition
 
 from colorama import Fore
@@ -6,7 +7,7 @@ from colorama import Fore
 from head.ears import listen
 from command.keys.commands import commands
 from command.keys.load_custom_commands import load_commands
-from speech.speak import talk
+from head.speech.speak import talk
 
 
 async def start_cortex():
@@ -50,5 +51,5 @@ async def process_command(text):
         if found:
             break
     if not found:
-        talk("how can i help")
+        await asyncio.to_thread(talk, "how can i help")
         print(Fore.YELLOW + f"Recognized: {text}")
